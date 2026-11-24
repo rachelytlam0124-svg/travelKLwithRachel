@@ -120,6 +120,17 @@
             animation: stampPop 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
+        /* 可愛字體輕柔搖擺動畫 */
+        @keyframes gentleSway {
+            0%, 100% { transform: rotate(-2.5deg) translateY(0px); }
+            50% { transform: rotate(2.5deg) translateY(-3px); }
+        }
+        .sway-text {
+            display: inline-block;
+            animation: gentleSway 2.6s ease-in-out infinite;
+            transform-origin: center center;
+        }
+
         /* 拍立得照片可點擊放大提示 */
         .polaroid-zoom {
             cursor: zoom-in;
@@ -512,6 +523,37 @@
                 </div>
             </div>
 
+            <!-- 首頁 RM <-> HKD 即時換算小算盤 -->
+            <div class="bg-warmPaper rounded-3xl p-5 sm:p-7 border border-oat shadow-journal space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                        <span class="px-3 py-0.5 rounded-full bg-creamBlue text-darkBrown text-xs font-maru font-bold">🎀 RM ↔ HKD CALCULATOR</span>
+                        <h3 class="font-maru text-lg sm:text-xl font-bold text-darkBrown mt-2">馬幣 (RM) ↔ 港幣 (HKD) 即時換算小算盤</h3>
+                    </div>
+                    <span class="text-xs text-lightBrown font-bold">參考匯率：1 RM ≈ 1.73 HKD</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-cream p-3.5 rounded-2xl border border-oat">
+                        <label for="overview-input-rm" class="block text-xs font-bold text-lightBrown mb-1">🇲🇾 馬來西亞令吉 (RM / MYR)</label>
+                        <input type="number" id="overview-input-rm" value="100" min="0" step="1" oninput="syncFromRM(this.value)" class="w-full text-xl font-serif font-bold text-darkBrown bg-transparent border-b border-oat focus:border-darkBrown focus:outline-none py-1">
+                    </div>
+                    <div class="bg-cream p-3.5 rounded-2xl border border-oat">
+                        <label for="overview-input-hkd" class="block text-xs font-bold text-lightBrown mb-1">🇭🇰 港幣 (HKD)</label>
+                        <input type="number" id="overview-input-hkd" value="173.0" min="0" step="1" oninput="syncFromHKD(this.value)" class="w-full text-xl font-serif font-bold text-darkBrown bg-transparent border-b border-oat focus:border-darkBrown focus:outline-none py-1">
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2 pt-1">
+                    <span class="text-xs text-darkBrown/70 self-center">快捷試算：</span>
+                    <button onclick="setQuickRM(10)" class="px-3 py-1 rounded-full bg-beige hover:bg-oat text-xs font-maru text-darkBrown transition">RM 10 (Grab平分)</button>
+                    <button onclick="setQuickRM(45)" class="px-3 py-1 rounded-full bg-beige hover:bg-oat text-xs font-maru text-darkBrown transition">RM 45 (榴蓮拉麵)</button>
+                    <button onclick="setQuickRM(70)" class="px-3 py-1 rounded-full bg-beige hover:bg-oat text-xs font-maru text-darkBrown transition">RM 70 (HyFly滑索)</button>
+                    <button onclick="setQuickRM(99)" class="px-3 py-1 rounded-full bg-beige hover:bg-oat text-xs font-maru text-darkBrown transition">RM 99 (BattleKart)</button>
+                    <button onclick="setQuickRM(228)" class="px-3 py-1 rounded-full bg-beige hover:bg-oat text-xs font-maru text-darkBrown transition">RM 228 (音樂節門票)</button>
+                </div>
+            </div>
+
             <!-- 高 CP 值伴手禮推薦與購買地點 -->
             <div class="bg-warmPaper rounded-3xl p-5 sm:p-8 border border-oat shadow-journal space-y-5">
                 <div class="flex flex-wrap items-center justify-between gap-2">
@@ -647,10 +689,10 @@
             <article id="card-d1s1" class="stop-card relative bg-warmPaper rounded-3xl p-5 sm:p-6 border border-oat shadow-journal transition-all">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
                     <div class="md:col-span-5 space-y-3">
-                        <div onclick="openLightbox('https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=900&q=85', 'STOP 01 茨廠街市集與老城區 City Walk', '百年唐人街地標 • 建議時間 10:30 – 12:30', 'https://www.malaysia.travel/explore/petaling-street')" class="polaroid-zoom bg-white p-2.5 pb-4 rounded-2xl border border-oat shadow-polaroid">
+                        <div onclick="openLightbox('https://i.postimg.cc/vBQ7NxHV/ying-mu-jie-tu-2026-11-22-xia-wu3-45-23.png', 'STOP 01 茨廠街市集與老城區 City Walk', '百年唐人街地標 • 建議時間 10:30 – 12:30', 'https://www.malaysia.travel/explore/petaling-street')" class="polaroid-zoom bg-white p-2.5 pb-4 rounded-2xl border border-oat shadow-polaroid">
                             <div class="aspect-[4/3] w-full rounded-xl overflow-hidden bg-beige">
                                 <img 
-                                    src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=900&q=85" 
+                                    src="https://i.postimg.cc/vBQ7NxHV/ying-mu-jie-tu-2026-11-22-xia-wu3-45-23.png" 
                                     onerror="this.src='https://placehold.co/600x450/E5DEC9/4A3B32?text=Petaling+Street+KL'"
                                     alt="茨廠街市集與老城區 City Walk" 
                                     class="w-full h-full object-cover"
@@ -710,13 +752,51 @@
                             </div>
                             <div class="bg-cream p-2.5 rounded-xl border border-oat col-span-2 sm:col-span-1">
                                 <div class="text-lightBrown font-bold">🍜 必吃重點</div>
-                                <div class="font-bold text-darkBrown mt-0.5">海南茶、生熟蛋吐司、豆腐花😋</div>
+                                <div class="font-bold text-darkBrown mt-0.5">豐揚咖喱面、阿福腸粉酿豆腐😋</div>
                             </div>
                         </div>
 
-                        <!-- 附近推薦 -->
-                        <div class="bg-beige/60 rounded-2xl p-3 border border-oat text-xs text-darkBrown">
-                            <strong>✨ 附近推薦順遊與美食🤍😋：</strong>何九海南茶店（人氣排隊復古茶室）、義欽豆腐花 & 羅漢果龍眼冰糖燉冬瓜、麗豐啦啦米、漢記靚粥。
+                        <!-- 附近推薦 + 豐揚咖喱面 & 阿福腸粉酿豆腐拍立得小卡 -->
+                        <div class="bg-beige/60 rounded-2xl p-3.5 border border-oat text-xs text-darkBrown space-y-3">
+                            <div>
+                                <strong>✨ 附近推薦順遊與美食🤍😋：</strong>豐揚咖喱面、阿福腸粉酿豆腐、何九海南茶店（人氣排隊復古茶室）、義欽豆腐花 & 羅漢果龍眼冰糖燉冬瓜、麗豐啦啦米、漢記靚粥。
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                                <!-- 豐揚咖喱面拍立得小卡 -->
+                                <div onclick="openLightbox('https://i.postimg.cc/hPFXvhfT/IMG-2822.jpg', '豐揚咖喱面', '茨廠街老城區必食南洋咖喱面 • 點擊放大查看', '')" class="polaroid-zoom bg-white p-2 pb-2.5 rounded-xl border border-oat shadow-sm hover:shadow-polaroid transition flex items-center gap-2.5">
+                                    <div class="w-16 h-16 rounded-lg overflow-hidden bg-beige shrink-0 border border-oat/70">
+                                        <img 
+                                            src="https://i.postimg.cc/hPFXvhfT/IMG-2822.jpg" 
+                                            onerror="this.src='https://placehold.co/240x240/E5DEC9/4A3B32?text=Curry+Mee'"
+                                            alt="豐揚咖喱面" 
+                                            class="w-full h-full object-cover"
+                                        >
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <div class="font-maru font-bold text-xs text-darkBrown truncate">🍜 豐揚咖喱面</div>
+                                        <p class="text-[11px] text-darkBrown/75 leading-snug mt-0.5">香濃椰漿咖喱湯底配爽滑麵條與豐富配料，老城區暖胃必試！</p>
+                                        <span class="inline-block text-[10px] font-bold text-lightBrown mt-1">🔍 點擊放大照片</span>
+                                    </div>
+                                </div>
+
+                                <!-- 阿福腸粉酿豆腐拍立得小卡 -->
+                                <div onclick="openLightbox('https://i.postimg.cc/RCwMPdZN/IMG-2823.jpg', '阿福腸粉酿豆腐', '老城區人氣地道小吃 • 點擊放大查看', '')" class="polaroid-zoom bg-white p-2 pb-2.5 rounded-xl border border-oat shadow-sm hover:shadow-polaroid transition flex items-center gap-2.5">
+                                    <div class="w-16 h-16 rounded-lg overflow-hidden bg-beige shrink-0 border border-oat/70">
+                                        <img 
+                                            src="https://i.postimg.cc/RCwMPdZN/IMG-2823.jpg" 
+                                            onerror="this.src='https://placehold.co/240x240/DCE7EE/4A3B32?text=Chee+Cheong+Fun'"
+                                            alt="阿福腸粉酿豆腐" 
+                                            class="w-full h-full object-cover"
+                                        >
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <div class="font-maru font-bold text-xs text-darkBrown truncate">🥢 阿福腸粉酿豆腐</div>
+                                        <p class="text-[11px] text-darkBrown/75 leading-snug mt-0.5">滑嫩腸粉搭惹味酿豆腐與秘製醬汁，掃街拼食超滿足！</p>
+                                        <span class="inline-block text-[10px] font-bold text-lightBrown mt-1">🔍 點擊放大照片</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- 互動手帳隨手記便條 -->
@@ -1533,9 +1613,26 @@
     </main>
 
     <!-- 頁尾手帳簽名 -->
-    <footer class="max-w-5xl mx-auto px-4 mt-12 text-center space-y-2 text-xs text-lightBrown">
+    <footer class="max-w-5xl mx-auto px-4 mt-12 text-center space-y-4 text-xs text-lightBrown">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-warmPaper border border-oat">
             <span>🦆 Made with Love for Rachel 鴨仔團 • KL Travel Journal 2027/01/28–01/31</span>
+        </div>
+
+        <!-- 網站底版面跳轉按鈕列 -->
+        <div class="bg-warmPaper/95 rounded-2xl p-3 border border-oat shadow-sm flex flex-wrap items-center justify-center gap-2">
+            <span class="text-xs font-maru font-bold text-darkBrown mr-1">🎀 前往其他版面：</span>
+            <button onclick="switchTab('overview')" class="px-3.5 py-1.5 rounded-full bg-cream hover:bg-oat border border-oat text-xs font-maru font-bold text-darkBrown transition">🏠 首頁與行前</button>
+            <button onclick="switchTab('day1')" class="px-3.5 py-1.5 rounded-full bg-cream hover:bg-oat border border-oat text-xs font-maru font-bold text-darkBrown transition">🏮 Day 1 (1/28)</button>
+            <button onclick="switchTab('day2')" class="px-3.5 py-1.5 rounded-full bg-cream hover:bg-oat border border-oat text-xs font-maru font-bold text-darkBrown transition">🪂 Day 2 (1/29)</button>
+            <button onclick="switchTab('day3')" class="px-3.5 py-1.5 rounded-full bg-creamBlue/70 hover:bg-creamBlue border border-softBlue/40 text-xs font-maru font-bold text-darkBrown transition">🎤 Day 3 (1/30)</button>
+            <button onclick="switchTab('day4')" class="px-3.5 py-1.5 rounded-full bg-cream hover:bg-oat border border-oat text-xs font-maru font-bold text-darkBrown transition">🏎️ Day 4 (1/31)</button>
+            <button onclick="switchTab('budget')" class="px-3.5 py-1.5 rounded-full bg-cream hover:bg-oat border border-oat text-xs font-maru font-bold text-darkBrown transition">💰 窮遊預算</button>
+        </div>
+
+        <div class="pt-1">
+            <span class="sway-text font-maru font-bold text-sm sm:text-base text-darkBrown px-4 py-1.5 rounded-full bg-creamBlue/60 border border-softBlue/40 shadow-sm">
+                ✨ Rachel祝各位旅途愉快 🦆💕
+            </span>
         </div>
     </footer>
 
@@ -1634,14 +1731,17 @@
 
         // 2. 互動式行前準備清單 (支援 LocalStorage 記憶勾選狀態)
         const defaultChecklist = [
-            { id: 'item1', text: '有效期 6 個月以上護照 + 機票/住宿確認單截圖', checked: false },
-            { id: 'item2', text: '出發前 3 天內免費填寫大馬電子入境卡 (MDAC)', checked: false },
+            { id: 'item0', text: '提Rachel帶相機！ Thank you BABY', checked: false },
+            { id: 'item1', text: '有效期6個月以上護照＋機票/住宿確認單截圖', checked: false },
+            { id: 'item2', text: '出發前3天內免費填寫大馬電子入境卡（MDAC）', checked: false },
             { id: 'item3', text: '下載 Grab App 並綁定信用卡 / Apple Pay + 少量馬幣現金', checked: false },
-            { id: 'item4', text: '包趾運動鞋（Day 2 高空滑索 & Day 4 BattleKart 強制規定！）', checked: false },
-            { id: 'item5', text: '音樂節裝備：小包（限 35×20cm 內）、便攜小風扇、防曬乳、充電寶', checked: false },
-            { id: 'item6', text: '泳衣（The Platinum 2 頂樓 51 樓無邊際泳池影雙子塔必備！）', checked: false },
-            { id: 'item7', text: '輕便摺疊雨傘（1 月底午後雷陣雨）+ 過膝下著（參觀興都廟）', checked: false },
-            { id: 'item8', text: '腸胃藥（挑戰完 Day 2 暗黑榴蓮拉麵的安心保險 😂）', checked: false }
+            { id: 'item4', text: '包趾運動鞋（Day 2高空滑索 & Day 4 BattleKart 強制規定！）', checked: false },
+            { id: 'item5', text: '音樂節裝備：小包、便攜小風扇、防曬乳、尿袋', checked: false },
+            { id: 'item6', text: '泳衣（The Platinum 2 頂樓51樓無邊際泳池影雙子塔必備！）', checked: false },
+            { id: 'item7', text: '輕便摺疊雨傘（1月底午後雷陣雨）', checked: false },
+            { id: 'item8', text: '腸胃藥，止痛藥', checked: false },
+            { id: 'item9', text: '膠袋', checked: false },
+            { id: 'item10', text: '化妝品', checked: false }
         ];
 
         function renderChecklist() {
@@ -1686,29 +1786,48 @@
         // 3. RM <-> HKD 即時匯率換算邏輯 (1 RM ≈ 1.73 HKD)
         const RATE = 1.73;
 
+        function syncFromRM(val) {
+            const rmVal = parseFloat(val);
+            const hkdVal = isNaN(rmVal) ? '' : (rmVal * RATE).toFixed(1);
+            const rmStr = isNaN(rmVal) ? '' : val;
+
+            const rmBudget = document.getElementById('input-rm');
+            const hkdBudget = document.getElementById('input-hkd');
+            const rmOverview = document.getElementById('overview-input-rm');
+            const hkdOverview = document.getElementById('overview-input-hkd');
+
+            if (rmBudget && document.activeElement !== rmBudget) rmBudget.value = rmStr;
+            if (hkdBudget) hkdBudget.value = hkdVal;
+            if (rmOverview && document.activeElement !== rmOverview) rmOverview.value = rmStr;
+            if (hkdOverview) hkdOverview.value = hkdVal;
+        }
+
+        function syncFromHKD(val) {
+            const hkdVal = parseFloat(val);
+            const rmVal = isNaN(hkdVal) ? '' : (hkdVal / RATE).toFixed(1);
+            const hkdStr = isNaN(hkdVal) ? '' : val;
+
+            const rmBudget = document.getElementById('input-rm');
+            const hkdBudget = document.getElementById('input-hkd');
+            const rmOverview = document.getElementById('overview-input-rm');
+            const hkdOverview = document.getElementById('overview-input-hkd');
+
+            if (hkdBudget && document.activeElement !== hkdBudget) hkdBudget.value = hkdStr;
+            if (rmBudget) rmBudget.value = rmVal;
+            if (hkdOverview && document.activeElement !== hkdOverview) hkdOverview.value = hkdStr;
+            if (rmOverview) rmOverview.value = rmVal;
+        }
+
         function convertFromRM() {
-            const rmVal = parseFloat(document.getElementById('input-rm').value);
-            const hkdInput = document.getElementById('input-hkd');
-            if (isNaN(rmVal)) {
-                hkdInput.value = '';
-                return;
-            }
-            hkdInput.value = (rmVal * RATE).toFixed(1);
+            syncFromRM(document.getElementById('input-rm').value);
         }
 
         function convertFromHKD() {
-            const hkdVal = parseFloat(document.getElementById('input-hkd').value);
-            const rmInput = document.getElementById('input-rm');
-            if (isNaN(hkdVal)) {
-                rmInput.value = '';
-                return;
-            }
-            rmInput.value = (hkdVal / RATE).toFixed(1);
+            syncFromHKD(document.getElementById('input-hkd').value);
         }
 
         function setQuickRM(amount) {
-            document.getElementById('input-rm').value = amount;
-            convertFromRM();
+            syncFromRM(amount);
         }
 
         // 4. 拍立得大圖燈箱控制
